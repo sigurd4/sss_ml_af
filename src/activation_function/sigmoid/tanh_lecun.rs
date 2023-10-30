@@ -3,7 +3,7 @@ use super::*;
 const SCALE: f64 = 1.7159;
 const SENS: f64 = 2.0/3.0;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct TanhLeCun;
 
 impl<F> BoundingFunction<F> for TanhLeCun
@@ -25,3 +25,16 @@ where
 }
 
 impl_bf!(TanhLeCun);
+
+#[cfg(test)]
+mod test
+{
+    use super::TanhLeCun as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

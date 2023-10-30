@@ -4,7 +4,7 @@ use statrs::consts::SQRT_2PI;
 
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Probit;
 
 impl<F> BoundingFunction<F> for Probit
@@ -44,3 +44,16 @@ where
 }
 
 impl_bf!(Probit);
+
+#[cfg(test)]
+mod test
+{
+    use super::Probit as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

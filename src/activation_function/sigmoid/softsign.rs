@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Softsign;
 
 impl<F> BoundingFunction<F> for Softsign
@@ -22,3 +22,16 @@ where
 }
 
 impl_bf!(Softsign);
+
+#[cfg(test)]
+mod test
+{
+    use super::Softsign as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

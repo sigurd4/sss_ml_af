@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Clip;
 
 impl<F> BoundingFunction<F> for Clip
@@ -21,3 +21,16 @@ where
 }
 
 impl_bf!(Clip);
+
+#[cfg(test)]
+mod test
+{
+    use super::Clip as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

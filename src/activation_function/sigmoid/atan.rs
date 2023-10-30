@@ -2,7 +2,7 @@ use std::f64::consts::{FRAC_PI_2, FRAC_2_PI, PI};
 
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Atan;
 
 impl<F> BoundingFunction<F> for Atan
@@ -23,3 +23,16 @@ where
 }
 
 impl_bf!(Atan);
+
+#[cfg(test)]
+mod test
+{
+    use super::Atan as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

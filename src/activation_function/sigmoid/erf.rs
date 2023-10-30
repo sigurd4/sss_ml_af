@@ -2,7 +2,7 @@ use std::{f64::consts::FRAC_2_SQRT_PI, f32::consts::FRAC_PI_4};
 
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Erf;
 
 impl<F> BoundingFunction<F> for Erf
@@ -23,3 +23,16 @@ where
 }
 
 impl_bf!(Erf);
+
+#[cfg(test)]
+mod test
+{
+    use super::Erf as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

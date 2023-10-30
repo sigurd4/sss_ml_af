@@ -23,6 +23,7 @@ mod tests
     use super::*;
 
     const N: usize = 100;
+    const MAX: f64 = 1000.0;
 
     pub fn plot_bf<BF, R, const K: usize>(bf: BF, z: R, k: [f64; K])
     where
@@ -30,8 +31,8 @@ mod tests
         R: LinspaceArray<f64, N>
     {
         let z = z.linspace_array();
-        let y = z.map2(|z| bf.bf_y(z, k));
-        let dydz = z.map2(|z| bf.bf_dydz(z, k).0);
+        let y = z.map2(|z| bf.bf_y(z, k).min(MAX).max(-MAX));
+        let dydz = z.map2(|z| bf.bf_dydz(z, k).0.min(MAX).max(-MAX));
 
         let bf_name = format!("{:?}", bf);
 
@@ -52,7 +53,7 @@ mod tests
 
         crate::plot::plot_curve(&format!("{}: y(z)", bf_name), &format!("plot/af_{}_y.png", &file_name), z, y)
             .expect("Failed plot");
-        crate::plot::plot_curve(&format!("{}: dy/dz(z)", bf_name), &format!("plot/af_{}_dydz.png", &file_name), z, y)
+        crate::plot::plot_curve(&format!("{}: dy/dz(z)", bf_name), &format!("plot/af_{}_dydz.png", &file_name), z, dydz)
             .expect("Failed plot");
     }
 }

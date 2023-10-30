@@ -6,10 +6,20 @@ use super::*;
 
 use statrs::function::factorial;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Smoothstep
 {
     pub n: u16
+}
+
+impl Smoothstep
+{
+    pub fn new(n: u16) -> Self
+    {
+        Self {
+            n
+        }
+    }
 }
 
 impl<F> BoundingFunction<F> for Smoothstep
@@ -54,3 +64,16 @@ where
 }
 
 impl_bf!(Smoothstep; 0 where F: MulAssign + Default);
+
+#[cfg(test)]
+mod test
+{
+    use super::Smoothstep as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF::new(2), -5.0..5.0, [])
+    }
+}

@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct AlgebraicSigmoid;
 
 impl<F> BoundingFunction<F, 1> for AlgebraicSigmoid
@@ -45,3 +45,16 @@ where
 }
 
 impl_bf!(AlgebraicSigmoid; 1);
+
+#[cfg(test)]
+mod test
+{
+    use super::ReLUN as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [1.0])
+    }
+}

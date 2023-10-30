@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct CLogLog;
 
 impl<F> BoundingFunction<F> for CLogLog
@@ -21,3 +21,16 @@ where
 }
 
 impl_bf!(CLogLog);
+
+#[cfg(test)]
+mod test
+{
+    use super::CLogLog as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [])
+    }
+}

@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct ReLUN;
 
 impl<F> BoundingFunction<F, 1> for ReLUN
@@ -56,3 +56,16 @@ where
 }
 
 impl_bf!(ReLUN; 1);
+
+#[cfg(test)]
+mod test
+{
+    use super::ReLUN as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [0.1])
+    }
+}

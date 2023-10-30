@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct SmoothInterpolation;
 
 impl<F> BoundingFunction<F, 1> for SmoothInterpolation
@@ -44,3 +44,16 @@ where
 }
 
 impl_bf!(SmoothInterpolation; 1);
+
+#[cfg(test)]
+mod test
+{
+    use super::SmoothInterpolation as BF;
+    use crate::tests;
+
+    #[test]
+    fn test()
+    {
+        tests::plot_bf(BF, -5.0..5.0, [1.0])
+    }
+}
